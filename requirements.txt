@@ -7,4 +7,3 @@ chromadb==0.4.6
 tiktoken==0.4.0
 pyngrok==6.0.0
 Flask==2.3.2
-langchain.vectorstores.Chroma
