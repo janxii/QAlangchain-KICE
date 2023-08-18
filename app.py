@@ -52,14 +52,19 @@ FLASK_SERVER_URL = "http://localhost:5001"  # 예: "http://12345678.ngrok.io"
 # API 키 설정 및 초기화
 os.environ["OPENAI_API_KEY"] = st.secrets["api_key"]
 
-vectordb = Chroma(persist_directory='db', embedding_function=OpenAIEmbeddings())
-retriever = vectordb.as_retriever(search_kwargs={"k": 3})
-qa_chain_global = RetrievalQA.from_chain_type(
-    llm=ChatOpenAI(model='gpt-3.5-turbo', temperature=0),
-    chain_type="stuff",
-    retriever=retriever,
-    return_source_documents=True
-)
+@st.cache(allow_output_mutation=True)
+def load_models():
+    vectordb = Chroma(persist_directory='db', embedding_function=OpenAIEmbeddings())
+    retriever = vectordb.as_retriever(search_kwargs={"k": 3})
+    qa_chain = RetrievalQA.from_chain_type(
+        llm=ChatOpenAI(model='gpt-3.5-turbo', temperature=0),
+        chain_type="stuff",
+        retriever=retriever,
+        return_source_documents=True
+    )
+    return vectordb, qa_chain
+
+vectordb, qa_chain_global = load_models()
 
 st.title(':mag_right: Streamlit QA챗봇')
 chat_history = []
