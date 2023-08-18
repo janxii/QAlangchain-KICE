@@ -6,4 +6,4 @@ openai==0.27.6
 chromadb==0.4.6
 tiktoken==0.4.0
 pyngrok==6.0.0
-splite3==3.35.0
+sqlite3.Chroma requires sqlite3 >= 3.35.0
