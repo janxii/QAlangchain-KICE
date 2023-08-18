@@ -14,7 +14,7 @@ import pytz
 
 app = Flask(__name__)
 
-API_CALL_LIMIT = 15
+API_CALL_LIMIT = 20
 ip_data = {}
 korea_timezone = pytz.timezone('Asia/Seoul')
 
@@ -55,7 +55,7 @@ os.environ["OPENAI_API_KEY"] = st.secrets["api_key"]
 vectordb = Chroma(persist_directory='db', embedding_function=OpenAIEmbeddings())
 retriever = vectordb.as_retriever(search_kwargs={"k": 3})
 qa_chain_global = RetrievalQA.from_chain_type(
-    llm=ChatOpenAI(model='gpt-3.5-turbo', temperature=5),
+    llm=ChatOpenAI(model='gpt-3.5-turbo', temperature=0),
     chain_type="stuff",
     retriever=retriever,
     return_source_documents=True
