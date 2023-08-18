@@ -4,7 +4,7 @@ from datetime import datetime
 import streamlit as st
 from langchain.vectorstores import Chroma
 from langchain.embeddings import OpenAIEmbeddings
-from langchain.chat_models import ChatOpenAI
+from langchain.llms import OpenAI
 from langchain.chains import RetrievalQA
 import os
 import requests
@@ -55,7 +55,7 @@ os.environ["OPENAI_API_KEY"] = st.secrets["api_key"]
 vectordb = Chroma(persist_directory='db', embedding_function=OpenAIEmbeddings())
 retriever = vectordb.as_retriever(search_kwargs={"k": 3})
 qa_chain_global = RetrievalQA.from_chain_type(
-    llm=ChatOpenAI(model='gpt-3.5-turbo', temperature=0),
+    llm=OpenAI(),
     chain_type="stuff",
     retriever=retriever,
     return_source_documents=True
