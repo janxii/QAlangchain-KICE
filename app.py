@@ -52,7 +52,7 @@ FLASK_SERVER_URL = "http://localhost:5001"  # 예: "http://12345678.ngrok.io"
 # API 키 설정 및 초기화
 os.environ["OPENAI_API_KEY"] = st.secrets["api_key"]
 
-vectordb = Chroma(persist_directory='https://github.com/janxii/QAlangchain-KICE/tree/main/db', embedding_function=OpenAIEmbeddings())
+vectordb = Chroma(persist_directory='db', embedding_function=OpenAIEmbeddings())
 retriever = vectordb.as_retriever(search_kwargs={"k": 3})
 qa_chain_global = RetrievalQA.from_chain_type(
     llm=ChatOpenAI(model='gpt-3.5-turbo', temperature=0),
