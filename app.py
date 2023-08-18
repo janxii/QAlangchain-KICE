@@ -14,7 +14,7 @@ import pytz
 
 app = Flask(__name__)
 
-API_CALL_LIMIT = 10
+API_CALL_LIMIT = 20
 ip_data = {}
 korea_timezone = pytz.timezone('Asia/Seoul')
 
