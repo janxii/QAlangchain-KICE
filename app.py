@@ -9,7 +9,9 @@ from langchain.chains import RetrievalQA
 import os
 import requests
 import pytz
-
+__import__('pysqlite3')
+import sys
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 # Flask 부분
 
 app = Flask(__name__)
