@@ -68,7 +68,7 @@ def load_models():
 
 vectordb, qa_chain_global = load_models()
 
-st.title(':mag_right: KICE QA챗봇')
+st.title(':mag_right: KICE LitMaster')
 chat_history = []
 user_input = st.text_input(label=':seedling: 당신이 궁금한 것을 질문해보세요!', placeholder='QA검색')
 
